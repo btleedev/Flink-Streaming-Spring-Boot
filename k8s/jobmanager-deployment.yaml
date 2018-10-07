@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flink-jobmanager-config
+  labels:
+    app: flink
+    component: jobmanager
+data:
+  max-content-length: "2000000000"
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: flink-jobmanager
+spec:
+ replicas: 1
+ template:
+   metadata:
+     labels:
+       app: flink
+       component: jobmanager
+   spec:
+     containers:
+     - name: jobmanager
+       image: flink:1.6.0
+       command:
+         - /bin/bash
+         - -xec
+         - 'echo "rest.client.max-content-length: $MAX_CONTENT_LENGTH" >> "$FLINK_HOME/conf/flink-conf.yaml" && echo "rest.server.max-content-length: $MAX_CONTENT_LENGTH" >> "$FLINK_HOME/conf/flink-conf.yaml" && echo "akka.framesize: $MAX_CONTENT_LENGTHb" >> "$FLINK_HOME/conf/flink-conf.yaml" && /docker-entrypoint.sh jobmanager'
+       ports:
+       - containerPort: 6123
+         name: rpc
+       - containerPort: 6124
+         name: blob
+       - containerPort: 6125
+         name: query
+       - containerPort: 8081
+         name: ui
+       env:
+       - name: JOB_MANAGER_RPC_ADDRESS
+         value: flink-jobmanager
+       - name: MAX_CONTENT_LENGTH
+         valueFrom:
+           configMapKeyRef:
+             name: flink-jobmanager-config
+             key: max-content-length

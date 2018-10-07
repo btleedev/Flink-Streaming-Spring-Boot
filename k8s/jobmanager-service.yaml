@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flink-jobmanager
+spec:
+  type: NodePort
+  ports:
+  - name: rpcs
+    port: 6123
+    targetPort: 6123
+  - name: blob
+    port: 6124
+    targetPort: 6124
+  - name: query
+    port: 6125
+    targetPort: 6125
+  - name: ui
+    port: 8081
+    targetPort: 8081
+  selector:
+    app: flink
+    component: jobmanager

@@ -1,0 +1,9 @@
+flink-properties:
+  job-name: "FlinkStreamingSpringBoot"
+  job-manager-url: "localhost"
+  job-manager-port: 8081
+  remote-env-jar-files:
+    - "target/flink-streaming-spring-boot-0.0.1-SNAPSHOT.jar"
+  max-client-rest-request-size-bytes: 2000000000
+  terminate: true
+  termination-grace-period-ms: 30000
