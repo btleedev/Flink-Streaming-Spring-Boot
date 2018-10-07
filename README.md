@@ -7,10 +7,11 @@ The application submits a Flink job via Flink's remote environment. The job is s
 See `com.tenble.flink.streaming.springboot.FlinkStreamingSpringBootTest` as an example.
 
 1. Import this project as a dependency for another project.
-2. During spring's context loading phase, autowire the bean `StreamExecutionEnvironment flinkEnvironment` in another bean and add operations to the environment.
-3. Copy the shade plugin step in `pom.xml` of this project to create an executable spring boot jar. See `<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer" />` to specify a mainClass.  
-3. Run `mvn clean package` on your project, which will create an executable spring boot application, with all dependencies put onto the classpath. Can be found in the `target` directory.
-4. Run this jar using `java -jar ${JAR_FILE}`. Specify any spring property overrides as jvm or program arguments. 
+2. Add `@EnableAutoConfigure` to your spring boot app.
+3. During spring's context loading phase, autowire the bean `StreamExecutionEnvironment flinkEnvironment` in another bean and add operations to the environment.
+4. Copy the shade plugin step in `pom.xml` of this project to create an executable spring boot jar. See `<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer" />` to specify a mainClass.  
+5. Run `mvn clean package` on your project, which will create an executable spring boot application, with all dependencies put onto the classpath. Can be found in the `target` directory.
+6. Run this jar using `java -jar ${JAR_FILE}`. Specify any spring property overrides as jvm or program arguments. 
 
 ## Properties
 ```
