@@ -1,3 +1,7 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
 flink-properties:
   job-name: "FlinkStreamingSpringBoot"
   job-manager-url: "localhost"
