@@ -1,7 +1,6 @@
 package com.tenble.flink.streaming.springboot;
 
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
